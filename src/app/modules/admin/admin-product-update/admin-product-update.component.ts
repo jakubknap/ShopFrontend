@@ -15,6 +15,9 @@ export class AdminProductUpdateComponent implements OnInit {
 
   product!: AdminProductUpdate;
   productForm!: FormGroup;
+  imageForm!: FormGroup;
+  requiredFileTypes = "image/jpeg, image/png, image/jpg";
+  image: string | null = null;
 
   constructor(
     private router: ActivatedRoute,
@@ -31,8 +34,21 @@ export class AdminProductUpdateComponent implements OnInit {
       description: ['', [Validators.required, Validators.minLength(4)]],
       category: ['', [Validators.required, Validators.minLength(4)]],
       price: ['', [Validators.required, Validators.min(0)]],
-      currency: ['PLN', Validators.required]
+      currency: ['PLN', Validators.required],
+      image: []
     })
+
+    this.imageForm = this.formBuilder.group({
+      file: ['']
+    });
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      this.imageForm.patchValue({
+        file: event.target.files[0]
+      })
+    }
   }
 
   getProduct() {
@@ -47,7 +63,8 @@ export class AdminProductUpdateComponent implements OnInit {
       description: this.productForm.get('description')?.value,
       category: this.productForm.get('category')?.value,
       price: this.productForm.get('price')?.value,
-      currency: this.productForm.get('currency')?.value
+      currency: this.productForm.get('currency')?.value,
+      image: this.image
     } as AdminProductUpdate).subscribe({
       next: product => {
         this.mapFormValues(product);
@@ -57,14 +74,21 @@ export class AdminProductUpdateComponent implements OnInit {
     });
   }
 
+  uploadFile() {
+    let formData = new FormData();
+    formData.append('file', this.imageForm.get('file')?.value);
+    this.adminProductUpdateService.uploadImage(formData).subscribe(result => this.image = result.filename);
+  }
 
   private mapFormValues(product: AdminProductUpdate): void {
-    return this.productForm.setValue({
+    this.productForm.setValue({
       name: product.name,
       description: product.description,
       category: product.category,
       price: product.price,
       currency: product.currency,
+      image: this.image
     });
+    this.image = product.image;
   }
 }
