@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AdminMessageService } from '../admin-message.service';
+import { AdminProductUpdateService } from '../admin-product-update/admin-product-update.service';
+import { AdminProductUpdate } from '../admin-product-update/model/adminProductUpdate';
 import { AdminProductAddService } from './admin-product-add.service';
 
 @Component({
@@ -13,13 +15,18 @@ import { AdminProductAddService } from './admin-product-add.service';
 export class AdminProductAddComponent implements OnInit {
 
   productForm!: FormGroup;
+  requiredFileTypes = "image/jpeg, image/png";
+  imageForm!: FormGroup;
+  image: string | null = null;
+
 
   constructor(
     private router: Router,
     private adminProductAddService: AdminProductAddService,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private adminMessageService: AdminMessageService) { }
+    private adminMessageService: AdminMessageService,
+    private adminProductUpdateService: AdminProductUpdateService) { }
 
 
   ngOnInit(): void {
@@ -31,16 +38,43 @@ export class AdminProductAddComponent implements OnInit {
       price: ['', [Validators.required, Validators.min(0)]],
       currency: ['PLN', Validators.required],
       slug: ['', [Validators.required, Validators.minLength(4)]]
-    })
+    });
+    this.imageForm = this.formBuilder.group({
+      file: ['']
+    });
   }
 
   submit() {
-    this.adminProductAddService.saveNewProduct(this.productForm.value).subscribe({
+    this.adminProductAddService.saveNewProduct({
+      name: this.productForm.get('name')?.value,
+      description: this.productForm.get('description')?.value,
+      fullDescription:
+        this.productForm.get('fullDescription')?.value,
+      category: this.productForm.get('category')?.value,
+      price: this.productForm.get('price')?.value,
+      currency: this.productForm.get('currency')?.value,
+      slug: this.productForm.get('slug')?.value,
+      image: this.image
+    } as AdminProductUpdate).subscribe({
       next: product => {
         this.router.navigate(["/admin/products/update", product.id])
           .then(() => this.snackBar.open("Produkt został dodany", "", { duration: 3000 }))
       },
       error: err => this.adminMessageService.addSpringErrors(err.error)
     })
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      this.imageForm.patchValue({
+        file: event.target.files[0]
+      })
+    }
+  }
+
+  uploadFile() {
+    let formData = new FormData();
+    formData.append('file', this.imageForm.get('file')?.value);
+    this.adminProductUpdateService.uploadImage(formData).subscribe(result => this.image = result.filename);
   }
 }
