@@ -14,13 +14,15 @@ import { HomeComponent } from './modules/home/home.component';
 import { LoginComponent } from './modules/login/login.component';
 import { ProductDetailsComponent } from './modules/product-details/product-details.component';
 import { ProductComponent } from './modules/product/product.component';
+import { CategoryComponent } from './modules/category/category.component';
 
 const routes: Routes = [
   {
     path: '', component: DefaultComponent, children: [
       { path: '', component: HomeComponent },
       { path: 'products', component: ProductComponent },
-      { path: 'products/:slug', component: ProductDetailsComponent }
+      { path: 'products/:slug', component: ProductDetailsComponent },
+      { path: 'categories/:slug', component: CategoryComponent }
     ]
   },
   {

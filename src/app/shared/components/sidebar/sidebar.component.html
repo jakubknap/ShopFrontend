@@ -1,5 +1,5 @@
 <mat-selection-list>
     <mat-list-item *ngFor="let category of categories">
-      {{category}}
+      <a routerLink="{{'/categories/' + category.slug}}"> {{category.name}} </a>
     </mat-list-item>
   </mat-selection-list>
