@@ -1,11 +1,12 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { CartIconService } from '../common/service/cart-icon.service';
 import { CartService } from './cart.service';
 import { CartSummary } from './model/cartSummary';
 import { CartSummaryItem } from './model/cartSummaryItem';
-import { CartIconService } from '../common/service/cart-icon.service';
 
 @Component({
   selector: 'app-cart',
@@ -16,6 +17,7 @@ export class CartComponent implements OnInit {
 
   formGroup!: FormGroup;
   summary!: CartSummary;
+  private isProductAdded = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -23,14 +25,17 @@ export class CartComponent implements OnInit {
     private cookieService: CookieService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private cartIconService: CartIconService
+    private cartIconService: CartIconService,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
     let id = Number(this.route.snapshot.queryParams['productId']);
     if (id > 0) {
+      this.isProductAdded = true;
       this.addToCart(id);
     } else {
+      this.isProductAdded = false;
       this.getCart();
     }
     this.formGroup = this.formBuilder.group({
@@ -82,7 +87,7 @@ export class CartComponent implements OnInit {
   }
 
   back() {
-    // this.location.historyGo(this.isProductAdded ? -2 : -1);
+    this.location.historyGo(this.isProductAdded ? -2 : -1);
   }
 
   private expiresDays(days: number): Date {
