@@ -3,30 +3,24 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CartSummary } from '../common/model/cart/cartSummary';
 import { CartCommonService } from '../common/service/cart-common.service';
+import { OrderSummary } from './model/orderSummary';
+import { OrderDto } from './model/orderDto';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
+export class OrderService {
 
   constructor(
-    private http: HttpClient,
+    private http: HttpClient, 
     private cartCommonService: CartCommonService
-  ){}
+    ) { }
 
   getCart(id: number): Observable<CartSummary> {
     return this.cartCommonService.getCart(id);
   }
 
-  addToCart(id: number, cartItem: any): Observable<CartSummary> {
-    return this.http.put<CartSummary>("/api/carts/" + id, cartItem);
-  }
-
-  updateCart(id: number, items: any[]): Observable<CartSummary> {
-    return this.http.put<CartSummary>(`/api/carts/${id}/update`, items);
-  }
-
-  deleteCartItem(id: number): Observable<void> {
-    return this.http.delete<void>("/api/cartItems/" + id);
+  placeOrder(order: OrderDto): Observable<OrderSummary> {
+    return this.http.post<OrderSummary>('/api/orders', order);
   }
 }
