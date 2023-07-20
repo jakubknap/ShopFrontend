@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { CartSummary } from '../common/model/cart/cartSummary';
+import { CartIconService } from '../common/service/cart-icon.service';
 import { InitData } from './model/initData';
 import { OrderDto } from './model/orderDto';
 import { OrderSummary } from './model/orderSummary';
@@ -26,7 +27,8 @@ export class OrderComponent implements OnInit {
   constructor(
     private cookieService: CookieService,
     private orderService: OrderService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private cartIconService: CartIconService
   ) { }
 
   ngOnInit(): void {
@@ -64,8 +66,9 @@ export class OrderComponent implements OnInit {
         shipmentId: Number(this.formGroup.get("shipment")?.value.id),
         paymentId: Number(this.formGroup.get("payment")?.value.id)
       } as OrderDto).subscribe(orderSummary => {
-        this.orderSummary = orderSummary,
-          this.cookieService.delete("cartId");
+        this.orderSummary = orderSummary;
+        this.cookieService.delete("cartId");
+        this.cartIconService.cartChanged(0);
       });
     }
   }
