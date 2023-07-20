@@ -19,6 +19,7 @@ export class OrderComponent implements OnInit {
   formGroup!: FormGroup;
   orderSummary!: OrderSummary;
   initData!: InitData;
+  errorMessage = false;
 
   private statuses = new Map<string, string>([
     ["NEW", "Nowe"],
@@ -65,10 +66,14 @@ export class OrderComponent implements OnInit {
         cartId: Number(this.cookieService.get("cartId")),
         shipmentId: Number(this.formGroup.get("shipment")?.value.id),
         paymentId: Number(this.formGroup.get("payment")?.value.id)
-      } as OrderDto).subscribe(orderSummary => {
-        this.orderSummary = orderSummary;
-        this.cookieService.delete("cartId");
-        this.cartIconService.cartChanged(0);
+      } as OrderDto).subscribe({
+        next: orderSummary => {
+          this.orderSummary = orderSummary;
+          this.cookieService.delete("cartId");
+          this.cartIconService.cartChanged(0);
+          this.errorMessage = false;
+        },
+        error: err => this.errorMessage = true
       });
     }
   }
