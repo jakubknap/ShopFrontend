@@ -20,6 +20,7 @@ import { AdminMessageComponent } from 'src/app/modules/admin/common/component/ad
 import { MaterialModule } from 'src/app/shared/material.module';
 import { FullpageadminComponent } from './fullpageadmin.component';
 import { AdminOrderExportComponent } from 'src/app/modules/admin/admin-order/admin-order-export/admin-order-export.component';
+import { AdminOrderStatsComponent } from 'src/app/modules/admin/admin-order/admin-order-stats/admin-order-stats.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { AdminOrderExportComponent } from 'src/app/modules/admin/admin-order/adm
     AdminReviewComponent,
     AdminOrderComponent,
     AdminOrderUpdateComponent,
-    AdminOrderExportComponent
+    AdminOrderExportComponent,
+    AdminOrderStatsComponent
   ],
   imports: [
     CommonModule,
