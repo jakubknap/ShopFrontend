@@ -42,6 +42,6 @@ export class AdminOrderComponent implements AfterViewInit {
   }
 
   resolveStatus(status: string){
-    return this.statuses.get(status);
+    return this.statuses?.get(status);
   }
 }

@@ -20,6 +20,7 @@ import { LoginComponent } from './modules/login/login.component';
 import { OrderComponent } from './modules/order/order.component';
 import { ProductDetailsComponent } from './modules/product-details/product-details.component';
 import { ProductComponent } from './modules/product/product.component';
+import { AdminOrderExportComponent } from './modules/admin/admin-order/admin-order-export/admin-order-export.component';
 
 const routes: Routes = [
   {
@@ -48,7 +49,8 @@ const routes: Routes = [
       { path: 'admin/categories/update/:id', component: AdminCategoryUpdateComponent },
       { path: 'admin/reviews', component: AdminReviewComponent },
       { path: 'admin/orders', component: AdminOrderComponent },
-      { path: 'admin/orders/update/:id', component: AdminOrderUpdateComponent }
+      { path: 'admin/orders/update/:id', component: AdminOrderUpdateComponent },
+      { path: 'admin/orders/export', component: AdminOrderExportComponent },
     ]
   }
 ];

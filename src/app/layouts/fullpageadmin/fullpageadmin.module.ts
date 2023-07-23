@@ -19,6 +19,7 @@ import { AdminConfirmDialogComponent } from 'src/app/modules/admin/common/compon
 import { AdminMessageComponent } from 'src/app/modules/admin/common/component/admin-message/admin-message.component';
 import { MaterialModule } from 'src/app/shared/material.module';
 import { FullpageadminComponent } from './fullpageadmin.component';
+import { AdminOrderExportComponent } from 'src/app/modules/admin/admin-order/admin-order-export/admin-order-export.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { FullpageadminComponent } from './fullpageadmin.component';
     AdminCategoryFormComponent,
     AdminReviewComponent,
     AdminOrderComponent,
-    AdminOrderUpdateComponent
+    AdminOrderUpdateComponent,
+    AdminOrderExportComponent
   ],
   imports: [
     CommonModule,
