@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FullpageComponent } from './fullpage.component';
+import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { LoginComponent } from 'src/app/modules/login/login.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { FullpageComponent } from './fullpage.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { LoginComponent } from 'src/app/modules/login/login.component';
     CommonModule,
     RouterModule,
     FlexLayoutModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class FullpageModule { }

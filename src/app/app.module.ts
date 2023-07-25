@@ -12,6 +12,7 @@ import { FullpageadminModule } from './layouts/fullpageadmin/fullpageadmin.modul
 import { FullpageadminemptyModule } from './layouts/fullpageadminempty/fullpageadminempty.module';
 import { AdminAuthorizeGuard } from './modules/common/guard/adminAuthorizeGuard';
 import { JwtInterceptor } from './modules/common/interceptor/jwt.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent
