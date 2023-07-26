@@ -7,7 +7,9 @@
         <button mat-raised-button color="primary" routerLink="">Strona główna</button>
         <button mat-raised-button color="primary" routerLink="/products">Produkty</button>
         <span></span>
-        <button mat-raised-button color="primary" routerLink="/login">Zaloguj</button>
-        <a routerLink="/cart"><mat-icon color="accent" class="shoppingBasket" matBadge="{{cartProductCounter}}" matBadgeColor="warn">shopping_basket</mat-icon></a>
+        <button mat-raised-button color="primary" routerLink="/login"><span *ngIf="!isLoggedIn">Zaloguj</span><span
+                *ngIf="isLoggedIn">Profil</span></button>
+        <a routerLink="/cart"><mat-icon color="accent" class="shoppingBasket" matBadge="{{cartProductCounter}}"
+                matBadgeColor="warn">shopping_basket</mat-icon></a>
     </div>
 </header>
