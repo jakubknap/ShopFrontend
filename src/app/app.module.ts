@@ -12,6 +12,7 @@ import { FullpageadminModule } from './layouts/fullpageadmin/fullpageadmin.modul
 import { FullpageadminemptyModule } from './layouts/fullpageadminempty/fullpageadminempty.module';
 import { AdminAuthorizeGuard } from './modules/admin/common/guard/adminAuthorizeGuard';
 import { JwtInterceptor } from './modules/common/interceptor/jwt.interceptor';
+import { ProfileAuthorizeGuard } from './modules/common/guard/profileAuthorizeGuard';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { JwtInterceptor } from './modules/common/interceptor/jwt.interceptor';
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [CookieService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, AdminAuthorizeGuard],
+  providers: [CookieService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, AdminAuthorizeGuard, ProfileAuthorizeGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
