@@ -19,7 +19,7 @@ import { AdminReviewComponent } from './modules/admin/admin-review/admin-review.
 import { AdminComponent } from './modules/admin/admin.component';
 import { CartComponent } from './modules/cart/cart.component';
 import { CategoryComponent } from './modules/category/category.component';
-import { AdminAuthorizeGuard } from './modules/common/guard/adminAuthorizeGuard';
+import { AdminAuthorizeGuard } from './modules/admin/common/guard/adminAuthorizeGuard';
 import { HomeComponent } from './modules/home/home.component';
 import { LoginComponent } from './modules/login/login.component';
 import { OrderComponent } from './modules/order/order.component';
