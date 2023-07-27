@@ -4,7 +4,7 @@ const proxy = require('http-proxy-middleware');
 const app = express();
 
 const apiProxy = proxy.createProxyMiddleware("/api", {
-    target: 'https://shopbackend-production-6a8c.up.railway.app/',
+    target: process.env.BACKEND_URL || 'https://shopbackend-production-6a8c.up.railway.app/',
     changeOrigin: true,
     pathRewrite: {
         '^/api':''
