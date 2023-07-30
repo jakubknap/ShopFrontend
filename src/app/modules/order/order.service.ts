@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CartSummary } from '../common/model/cart/cartSummary';
 import { CartCommonService } from '../common/service/cart-common.service';
-import { OrderSummary } from './model/orderSummary';
-import { OrderDto } from './model/orderDto';
 import { InitData } from './model/initData';
+import { NotificationDto } from './model/notificationDto';
+import { OrderDto } from './model/orderDto';
+import { OrderSummary } from './model/orderSummary';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,9 @@ import { InitData } from './model/initData';
 export class OrderService {
 
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private cartCommonService: CartCommonService
-    ) { }
+  ) { }
 
   getCart(id: number): Observable<CartSummary> {
     return this.cartCommonService.getCart(id);
@@ -25,7 +26,11 @@ export class OrderService {
     return this.http.post<OrderSummary>('/api/orders', order);
   }
 
-  getInitData(): Observable<InitData>{
+  getInitData(): Observable<InitData> {
     return this.http.get<InitData>("/api/orders/initData");
+  }
+
+  getStatus(hash: any): Observable<NotificationDto> {
+    return this.http.get<NotificationDto>("/api/orders/notification/" + hash);
   }
 }

@@ -13,6 +13,7 @@ import { ProductComponent } from 'src/app/modules/product/product.component';
 import { ProfileComponent } from 'src/app/modules/profile/profile.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DefaultComponent } from './default.component';
+import { OrderNotificationComponent } from 'src/app/modules/order/order-notification/order-notification.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DefaultComponent } from './default.component';
     CartComponent,
     OrderComponent,
     ReplacePipe,
-    ProfileComponent
+    ProfileComponent,
+    OrderNotificationComponent
   ],
   imports: [
     CommonModule,
