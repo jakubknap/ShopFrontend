@@ -1,13 +1,20 @@
-table{
+table {
     width: 100%;
 }
-.mat-column-id{
+
+.mat-column-id {
     width: 60px;
 }
 
-.mat-column-actions{
+.mat-column-actions {
     width: 140px;
 }
-.mat-column-image{
+
+.mat-column-image {
     width: 155px;
+}
+
+.salePrice {
+    color: green;
+    font-weight: 700;
 }
